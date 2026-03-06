@@ -2,11 +2,11 @@
 
 A robust, interactive web application built with Python and Streamlit, designed to process, visualize, and analyze bioprocess and fermentation data. 
 
-This tool is specifically tailored for **recombinant protein production workflows** or metabolic engineering processes that utilize a standard three-phase operational strategy: an initial **Batch** phase, an **Uninduced Fed-batch** phase for biomass accumulation, and a final **Induced Fed-batch** phase for product expression.
+This tool is specifically tailored for recombinant protein production workflows or metabolic engineering processes that utilize a standard three-phase operational strategy: an initial batch phase, an uninduced fed-batch phase for biomass accumulation, and a final induced Fed-batch phase for product expression.
 
 ## Important: Data Input Guidelines
 
-For the application to parse your data correctly, the input files (`.xlsx`, `.csv`, or Google Sheets) must strictly follow these formatting rules:
+For the application to parse your data correctly, the input files (`.xlsx`, `.csv`, or Google Sheets) must **strictly** follow these formatting rules:
 
 ### 1. Clean Data Tables Only
 The application requires "clean" tabular data. 
@@ -36,30 +36,31 @@ All charts and kinetic calculations ($\mu$, $q_p$) are strictly plotted and comp
 
 ### 1. Dynamic Import Engine
 * **Local & Cloud Support:** Upload local files or paste public Google Sheets links directly.
-* **Intelligent Parsing:** The backend uses a custom URL manipulation technique (`/export?format=xlsx`) to bypass the standard Google Sheets API constraints, ensuring a robust and error-free data ingestion process using native `pandas.read_excel`.
-* **Out-of-bounds Protection:** The app dynamically slices the dataframe (`iloc`). If you mistakenly specify an ending column (e.g., 'Z') that exceeds the actual data width, the application safely truncates the selection without crashing.
+* **Intelligent Parsing:** The backend uses a custom URL manipulation technique to bypass the standard Google Sheets API constraints, ensuring a robust and error-free data ingestion process using native `pandas.read_excel`.
+* **Out-of-bounds Protection:** The app dynamically slices the dataframe. If you mistakenly specify an ending column (e.g., 'Z') that exceeds the actual data width, the application safely truncates the selection without crashing.
 
 ### 2. Advanced Graphical Visualization
-* **Phase Shadowing:** The charts automatically shade the background to distinguish between distinct bioprocess phases:
-  * **Batch (Grey):** Initial growth phase.
-  * **Uninduced Fed-batch (Green):** Biomass accumulation phase.
-  * **Induced Fed-batch (Purple):** Production phase triggered by an inducer (e.g., IPTG).
-* **Smart Axis Markers:** Critical transition points (like the exact hour induction starts) are marked with **red numbers** on the X-axis to immediately highlight the biological shifts.
-* **Normalized Multi-axis Charts:** Plots a primary variable (e.g., OD600) on the main Y-axis while simultaneously plotting multiple secondary variables (e.g., pH, feeding rate, temperature) on a secondary Y-axis, mathematically normalizing them to a 0-100% scale for visual correlation.
+* **Flexible Multi-View Dashboard:** The application allows users to enable both visualization modes **simultaneously**, creating a comprehensive analytical workspace:
+  * *Combined Multi-axis Chart:* A "big picture" view that plots a primary variable (usually OD<sub>600</sub>) alongside multiple secondary parameters normalized to a 0-100% scale. This is ideal for identifying temporal correlations between different units.
+  * *Individual Parameter Charts:* Below the main chart, users can toggle individual plots for any variable. These maintain their original scales and units, providing the precision needed for deep-dive physiological monitoring.
+* **Phase Shadowing:** By providing the elapsed time of each bioprocess phase, the charts automatically shade the background to distinguish between them:
+  * Batch (Grey): Initial growth phase.
+  * Uninduced Fed-batch (Green): Biomass accumulation phase.
+  * Induced Fed-batch (Purple): Production phase triggered by an inducer.
+* **Smart Axis Markers:** Critical transition points (like the exact hour induction starts) are marked with red numbers on the X-axis to immediately highlight the biological shifts.
+* **X-axis fine tuning:** Both chart types (general combined and individual) count with a dual-knob slider that controls the displayed X-axis.
 
-### 3. Real-Time Specific Rate Calculator
+### 3. Specific Rate Calculator
 * Features an integrated tool to calculate the specific rate ($\mu$, $q_p$, $q_s$) based on the primary variable selected.
 * **Interactive Boundaries:** Slide a dual-knob selector to isolate the exponential phase. Toggleable orange dashed lines appear on the chart to visually confirm the selected time window.
 * **Mathematical Engine:** Performs a linear regression on the natural logarithm of the data ($\ln(y)$ vs $t$) using `numpy.polyfit`, instantly displaying the calculated rate in h⁻¹.
 
-### 4. Print-Ready Reporting 
-* This allows users to save the entire dashboard—including the interactive charts, the applied parameters, and the calculated kinetic metrics—as a high-quality, vector-based PDF report.
 
-## 🚀 How to Run Locally
+## How to Run Locally
 
 1. Clone this repository:
   ```bash
-   git clone [https://github.com/your-username/fermentation-app.git](https://github.com/your-username/fermentation-app.git)
+   git clone https://github.com/burallib/bioprocess-data-analyzer.git
    ```
 
 2. Install the required dependencies:
@@ -74,7 +75,7 @@ All charts and kinetic calculations ($\mu$, $q_p$) are strictly plotted and comp
 
 ---
 
-## 📬 Contact & Feedback
+## Contact & Feedback
 
 This project was developed by **Bautista Buralli**, a Biotechnology professional from the **National University of Rosario (UNR)**, Argentina. 
 
