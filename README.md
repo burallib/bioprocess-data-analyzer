@@ -1,10 +1,10 @@
-# 🧫 Bioprocess Data Analyzer
+# Bioprocess Data Analyzer
 
 A robust, interactive web application built with Python and Streamlit, designed to process, visualize, and analyze bioprocess and fermentation data. 
 
 This tool is specifically tailored for **recombinant protein production workflows** or metabolic engineering processes that utilize a standard three-phase operational strategy: an initial **Batch** phase, an **Uninduced Fed-batch** phase for biomass accumulation, and a final **Induced Fed-batch** phase for product expression.
 
-## ⚠️ Important: Data Input Guidelines
+## Important: Data Input Guidelines
 
 For the application to parse your data correctly, the input files (`.xlsx`, `.csv`, or Google Sheets) must strictly follow these formatting rules:
 
@@ -15,9 +15,9 @@ The application requires "clean" tabular data.
 
 ### 2. Delimiting the Working Area
 Raw data exported from bioreactor software (like BioCommand, Iris, or Eve) often includes dozens of metadata rows at the top before the actual data table begins. 
-To handle this, use the **Data Configuration Assistant** in the app to explicitly bound your table:
-* **Rows to skip:** Count from the top of your file down to the row *just before* your column headers.
-* **Column Range:** Explicitly set the starting and ending columns (e.g., from `A` to `T`) to prevent the app from reading blank columns or aggregated data to the right of your main table.
+To handle this, use the *Data Configuration Assistant* in the app to explicitly bound your table:
+* Rows to skip: Count from the top of your file down to the row *just before* your column headers.
+* Column Range: Explicitly set the starting and ending columns (e.g., from `A` to `T`) to prevent the app from reading blank columns or aggregated data to the right of your main table.
 
 <img width="1800" height="694" alt="Excel screenshot" src="https://github.com/user-attachments/assets/fff12c83-2189-4c39-a09f-d2b18c01b5e4" />
 Example of a raw bioreactor export. To parse this file correctly in the app, the user must set "Header rows to be skipped" to 21 and the "Column range" from C to R.
@@ -32,12 +32,12 @@ All charts and kinetic calculations ($\mu$, $q_p$) are strictly plotted and comp
 * **Do not** use absolute clock time (e.g., "14:30:00") or date formats, as the mathematical engine and the X-axis scaling require continuous numerical values to perform regressions and chart plotting accurately.
 ---
 
-## ✨ Key Features & Technical Details
+## Key Features & Technical Details
 
 ### 1. Dynamic Import Engine
 * **Local & Cloud Support:** Upload local files or paste public Google Sheets links directly.
 * **Intelligent Parsing:** The backend uses a custom URL manipulation technique (`/export?format=xlsx`) to bypass the standard Google Sheets API constraints, ensuring a robust and error-free data ingestion process using native `pandas.read_excel`.
-* **Out-of-bounds Protection:** The app dynamically slices the dataframe (`iloc`). If you specify an ending column (e.g., 'Z') that exceeds the actual data width, the application safely truncates the selection without crashing.
+* **Out-of-bounds Protection:** The app dynamically slices the dataframe (`iloc`). If you mistakenly specify an ending column (e.g., 'Z') that exceeds the actual data width, the application safely truncates the selection without crashing.
 
 ### 2. Advanced Graphical Visualization
 * **Phase Shadowing:** The charts automatically shade the background to distinguish between distinct bioprocess phases:
