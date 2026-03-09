@@ -4,6 +4,11 @@ A robust, interactive web application built with Python and Streamlit, designed 
 
 This tool is specifically tailored for recombinant protein production workflows or metabolic engineering processes that utilize a standard three-phase operational strategy: an initial batch phase, an uninduced fed-batch phase for biomass accumulation, and a final induced Fed-batch phase for product expression.
 
+<img width="605" height="652" alt="App screenshot" src="https://github.com/user-attachments/assets/04d7d617-b41b-4c65-9836-162ccb6e6662" />
+<img width="621" height="790" alt="App screenshot 2" src="https://github.com/user-attachments/assets/80f44024-2c12-40f7-bb1c-9f7a09e02b60" />
+
+*Real-time visualization with phase shadowing (Batch, Fed-batch, Induced) and kinetic calculations.*
+
 ## Important: Data Input Guidelines
 
 For the application to parse your data correctly, the input files (`.xlsx`, `.csv`, or Google Sheets) must **strictly** follow these formatting rules:
@@ -19,8 +24,9 @@ To handle this, use the *Data Configuration Assistant* in the app to explicitly 
 * Rows to skip: Count from the top of your file down to the row *just before* your column headers.
 * Column Range: Explicitly set the starting and ending columns (e.g., from `A` to `T`) to prevent the app from reading blank columns or aggregated data to the right of your main table.
 
-<img width="1800" height="694" alt="Excel screenshot" src="https://github.com/user-attachments/assets/fff12c83-2189-4c39-a09f-d2b18c01b5e4" />
-Example of a raw bioreactor export. To parse this file correctly in the app, the user must set "Header rows to be skipped" to 21 and the "Column range" from C to R.
+<img width="1800" height="694" alt="Excel screenshot" src="https://github.com/user-attachments/assets/888ea151-7096-4770-b0b7-8c3e3150ecc1" />
+
+*Example of a raw bioreactor export. To parse this file correctly in the app, the user must set "Header rows to be skipped" to 21 and the "Column range" from C to R.*
 
 ### 3. Google Sheets Privacy Settings
 If you choose to import data via a URL, the Google Sheet must be set to **"Anyone with the link can view"**. The application bypasses complex API authentication by directly exporting the sheet to a temporary Excel file, which is only possible if the document is completely public.
